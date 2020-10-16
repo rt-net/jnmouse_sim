@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>jnmouse_sim</name>
+  <version>0.0.0</version>
+  <description>ROS package suite for Jetson Nano Mouse Simulator</description>
+
+  <maintainer email="support@rt-net.jp">RT Corporation</maintainer>
+  <author email="daisuke.sato@rt-net.jp">Daisuke Sato</author>
+
+  <license>Apache-2.0</license>
+
+  <url type="website">https://github.com/rt-net/jnmouse_sim/wiki</url>
+  <url type="repository">https://github.com/rt-net/jnmouse_sim</url>
+  <url type="bugtracker">https://github.com/rt-net/jnmouse_sim/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>jnmouse_description</exec_depend>
+  <exec_depend>jnmouse_gazebo</exec_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>
