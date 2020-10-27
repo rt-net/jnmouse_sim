@@ -22,7 +22,6 @@
 
   <!-- for teleop -->
   <exec_depend>teleop_twist_keyboard</exec_depend>
-  <exec_depend>moveit_ros_visualization</exec_depend>
 
   <export>
   </export>
