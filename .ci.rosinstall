@@ -1,6 +1,6 @@
 - git:
     uri: https://github.com/rt-net/jnmouse_description.git
-    local-name: raspimouse_description
+    local-name: jnmouse_description
     version: master
 
 - git:
