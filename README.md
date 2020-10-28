@@ -13,7 +13,7 @@ Gaezbo上でJetson Nano MouseをシミュレーションするためのROSパッ
 ## 動作環境
 
 * Ubuntu
-  * Ubuntu Bionic Beaver 18.04.*
+  * Ubuntu 18.04 LTS (Bionic Beaver)
 * ROS
   * ROS Melodic Morenia
 * Gazebo
