@@ -47,7 +47,7 @@
                 robot_namespace:='$(arg robot_namespace)'
                 camera_namespace:='$(arg camera_namespace)'
                 diffdrive_namespace:='/raspimouse_on_gazebo'
-                sensor_namespace:='/raspimouse_on_gazebo'
+                sensor_namespace:='raspimouse_on_gazebo'
                 $(arg xacro_option)" />
   </group>
   <group unless="$(arg use_devfile)">
@@ -59,6 +59,7 @@
                 robot_namespace:='$(arg robot_namespace)'
                 camera_namespace:='$(arg camera_namespace)'
                 diffdrive_namespace:='/'
+                sensor_namespace:='jnmouse_on_gazebo'
                 $(arg xacro_option)" />
   </group>
 </launch>
