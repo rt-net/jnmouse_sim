@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Definitions of arguments that you can pass this launch file, for example paused:=true -->
+  <arg name="model" default="$(find jnmouse_description)/urdf/jnmouse.urdf.xacro" />
+  <arg name="paused" default="false" />
+  <arg name="use_sim_time" default="true" />
+  <arg name="gui" default="true" />
+  <arg name="headless" default="false" />
+  <arg name="debug" default="false" />
+  <arg name="use_devfile" default="false" />
+  <arg name="world_name" default="$(find jnmouse_gazebo)/worlds/empty.world" />
+  <arg name="xacro_option" default="" />
+  <arg name="camera_namespace" default="stereo_camera" />
+  <arg name="robot_namespace" default="" />
+
+  <!-- Initial position in Gazebo -->
+  <arg name="x0" default="0" />
+  <arg name="y0" default="0" />
+  <arg name="z0" default="0.01" />
+
+  <!-- Load the Gazebo simulator with specified world file -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="headless" value="$(arg headless)" />
+  </include>
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -model JetsonNanoMouse -param robot_description -x $(arg x0) -y $(arg y0) -z $(arg z0)" />
+
+  <!-- Publish robot's link & joint status -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- launch stereo camera image processing node -->
+  <node pkg="stereo_image_proc" name="stereo_image_proc" type="stereo_image_proc" required="true" output="screen" ns="stereo_camera" />
+
+  <group if="$(arg use_devfile)">
+    <!-- Simulate device file -->
+    <include file="$(find raspimouse_fake)/launch/virtual_device_file.launch" />
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+      command="$(find xacro)/xacro --inorder '$(arg model)' gazebo_plugin:=true tf:=false
+                robot_namespace:='$(arg robot_namespace)'
+                camera_namespace:='$(arg camera_namespace)'
+                diffdrive_namespace:='/raspimouse_on_gazebo'
+                sensor_namespace:='raspimouse_on_gazebo'
+                $(arg xacro_option)" />
+  </group>
+  <group unless="$(arg use_devfile)">
+    <!-- Simulate led distance sensor -->
+    <node name="distance_sensor_simulator" pkg="jnmouse_gazebo" type="distance_sensor_simulator.py" />
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+      command="$(find xacro)/xacro --inorder '$(arg model)' gazebo_plugin:=true tf:=true
+                robot_namespace:='$(arg robot_namespace)'
+                camera_namespace:='$(arg camera_namespace)'
+                diffdrive_namespace:='/'
+                sensor_namespace:='jnmouse_on_gazebo'
+                $(arg xacro_option)" />
+  </group>
+</launch>
