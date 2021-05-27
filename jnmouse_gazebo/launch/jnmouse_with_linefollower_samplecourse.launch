@@ -9,7 +9,7 @@
   <arg name="use_devfile" default="false" />
   <arg name="x0" default="0" />
   <arg name="y0" default="0" />
-  <arg name="z0" default="1.02" />
+  <arg name="z0" default="0.001" />
 
   <!-- Load the Gazebo simulator with specified world file -->
   <include file="$(find jnmouse_gazebo)/launch/jnmouse_with_emptyworld.launch">

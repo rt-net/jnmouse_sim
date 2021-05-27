@@ -10,10 +10,11 @@
     </include>
 
     <model name="linefollower_samplecourse">
+      <static>true</static>
       <include>
         <uri>model://linefollower_samplecourse</uri>
       </include>
-      <pose>0 0 1 0 0 0</pose>
+      <pose>0 0 0.001 0 0 0</pose>
     </model>
 
     <model name="ground_plane">
