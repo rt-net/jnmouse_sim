@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(jnmouse_gazebo)
 
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  gazebo_ros
+)
 
 catkin_package()
 
@@ -11,8 +13,6 @@ install(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-foreach(dir launch worlds)
-  install(DIRECTORY ${dir}/
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir}
-  )
-endforeach(dir)
+install(DIRECTORY launch models worlds
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
