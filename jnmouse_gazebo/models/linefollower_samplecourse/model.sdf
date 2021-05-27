@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="linefollower_samplecourse">
+    <link name="link">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>90</mass>
+        <inertia>
+          <ixx>80</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>80</iyy>
+          <iyz>0</iyz>
+          <izz>2</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.5 0.5 1.7</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://linefollower_samplecourse/meshes/box.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
+
